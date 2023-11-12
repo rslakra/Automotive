@@ -16,7 +16,7 @@
     <packaging>war</packaging>
 
     <properties>
-        <h2.version>2.1.214</h2.version>
+        <h2.version>2.2.220</h2.version>
         <liquibase.version>4.9.1</liquibase.version>
         <jstl.version>1.2</jstl.version>
         <appsuite-core.version>0.0.23</appsuite-core.version>
