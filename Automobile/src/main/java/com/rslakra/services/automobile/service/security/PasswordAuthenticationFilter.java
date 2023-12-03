@@ -1,7 +1,7 @@
 package com.rslakra.services.automobile.service.security;
 
-import com.devamatre.framework.core.BeanUtils;
-import com.devamatre.framework.spring.exception.InvalidRequestException;
+import com.devamatre.appsuite.core.BeanUtils;
+import com.devamatre.appsuite.spring.exception.InvalidRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
@@ -80,11 +80,11 @@ public class PasswordAuthenticationFilter extends UsernamePasswordAuthentication
      */
     @Override
     public Authentication attemptAuthentication(HttpServletRequest servletRequest, HttpServletResponse servletResponse)
-        throws AuthenticationException {
+            throws AuthenticationException {
         LOGGER.debug("+attemptAuthentication({}, {})", servletRequest, servletResponse);
         if (!HttpMethod.POST.matches(servletRequest.getMethod())) {
             throw new AuthenticationServiceException("Authentication method not supported: "
-                                                     + servletRequest.getMethod());
+                    + servletRequest.getMethod());
         }
 
         Authentication authentication = null;

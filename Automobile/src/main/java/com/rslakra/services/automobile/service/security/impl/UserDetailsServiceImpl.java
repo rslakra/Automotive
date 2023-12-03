@@ -1,8 +1,8 @@
 package com.rslakra.services.automobile.service.security.impl;
 
-import com.devamatre.framework.core.BeanUtils;
-import com.devamatre.framework.core.enums.RoleType;
-import com.devamatre.framework.spring.exception.NoRecordFoundException;
+import com.devamatre.appsuite.core.BeanUtils;
+import com.devamatre.appsuite.core.enums.RoleType;
+import com.devamatre.appsuite.spring.exception.NoRecordFoundException;
 import com.rslakra.services.automobile.domain.entities.AutoUser;
 import com.rslakra.services.automobile.domain.repositories.UserRepository;
 import org.slf4j.Logger;
@@ -16,12 +16,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-
-import javax.transaction.Transactional;
 
 /**
  * @author Rohtash Lakra (rohtash.singh@gmail.com)

@@ -1,12 +1,12 @@
 package com.rslakra.services.automobile.service.impl;
 
-import com.devamatre.framework.core.BeanUtils;
-import com.devamatre.framework.core.enums.EntityStatus;
-import com.devamatre.framework.spring.exception.AuthenticationException;
-import com.devamatre.framework.spring.exception.NoRecordFoundException;
-import com.devamatre.framework.spring.filter.Filter;
-import com.devamatre.framework.spring.persistence.Operation;
-import com.devamatre.framework.spring.service.AbstractServiceImpl;
+import com.devamatre.appsuite.core.BeanUtils;
+import com.devamatre.appsuite.core.enums.EntityStatus;
+import com.devamatre.appsuite.spring.exception.AuthenticationException;
+import com.devamatre.appsuite.spring.exception.NoRecordFoundException;
+import com.devamatre.appsuite.spring.filter.Filter;
+import com.devamatre.appsuite.spring.persistence.Operation;
+import com.devamatre.appsuite.spring.service.AbstractServiceImpl;
 import com.rslakra.services.automobile.domain.entities.Appointment;
 import com.rslakra.services.automobile.domain.entities.AutoUser;
 import com.rslakra.services.automobile.domain.repositories.AppointmentRepository;
@@ -174,7 +174,7 @@ public class AppointmentServiceImpl extends AbstractServiceImpl<Appointment, Lon
     @PreFilter("principal.id == filterObject.user.id")
     public String saveAll(List<Appointment> appointments) {
         return appointments.stream().map(appointment -> appointment.getUser().getEmail())
-            .collect(Collectors.joining(" "));
+                .collect(Collectors.joining(" "));
 //		final StringBuilder userAppointments = new StringBuilder();
 //
 //		//

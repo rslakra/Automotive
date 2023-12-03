@@ -1,6 +1,6 @@
 package com.rslakra.services.automobile.controller.web;
 
-import com.devamatre.framework.core.BeanUtils;
+import com.devamatre.appsuite.core.BeanUtils;
 import com.rslakra.services.automobile.domain.entities.AutoUser;
 import com.rslakra.services.automobile.dto.LoginRequest;
 import com.rslakra.services.automobile.service.AuthService;
@@ -65,7 +65,7 @@ public class AuthController {
         if (autoUserOptional.isPresent() && BeanUtils.isNotNull(authentication)) {
             LOGGER.debug("autoUserOptional: {}", autoUserOptional);
             LOGGER.debug("-login() authentication: {}, autoUserOptional: {}, redirect:/", authentication,
-                         autoUserOptional);
+                    autoUserOptional);
             return "redirect:/";
         }
 

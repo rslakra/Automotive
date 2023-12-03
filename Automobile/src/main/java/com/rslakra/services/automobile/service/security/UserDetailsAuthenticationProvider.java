@@ -1,6 +1,6 @@
 package com.rslakra.services.automobile.service.security;
 
-import com.devamatre.framework.core.BeanUtils;
+import com.devamatre.appsuite.core.BeanUtils;
 import com.rslakra.services.automobile.service.security.context.ContextUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,12 +53,12 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails,
                                                   UsernamePasswordAuthenticationToken authentication)
-        throws AuthenticationException {
+            throws AuthenticationException {
         LOGGER.debug("+additionalAuthenticationChecks({}, {})", userDetails, authentication);
         if (BeanUtils.isNull(authentication.getCredentials())) {
             logger.debug("Authentication failed: no credentials provided");
             throw new BadCredentialsException(
-                messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
+                    messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
         }
 
         String passwordProvided = ContextUtils.getAuthenticatedPassword(authentication);
@@ -66,7 +66,7 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
         if (!passwordEncoder.matches(passwordProvided, userDetails.getPassword())) {
             logger.debug("Authentication failed: password does not match stored value");
             throw new BadCredentialsException(
-                messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
+                    messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
         }
         LOGGER.debug("-additionalAuthenticationChecks()");
     }
@@ -88,7 +88,7 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
      */
     @Override
     protected UserDetails retrieveUser(String userName, UsernamePasswordAuthenticationToken authentication)
-        throws AuthenticationException {
+            throws AuthenticationException {
         LOGGER.debug("+retrieveUser({}, {})", userName, authentication);
         PasswordAuthenticationToken passwordAuthToken = (PasswordAuthenticationToken) authentication;
         UserDetails loadedUserDetails;
@@ -106,7 +106,7 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
 
         if (BeanUtils.isNull(loadedUserDetails)) {
             throw new InternalAuthenticationServiceException("UserDetailsService returned null, "
-                                                             + "which is an interface contract violation");
+                    + "which is an interface contract violation");
         }
 
         return loadedUserDetails;

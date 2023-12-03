@@ -1,14 +1,14 @@
 package com.rslakra.services.automobile.service.impl;
 
-import com.devamatre.framework.core.BeanUtils;
-import com.devamatre.framework.core.enums.EntityStatus;
-import com.devamatre.framework.core.enums.RoleType;
-import com.devamatre.framework.spring.exception.DuplicateRecordException;
-import com.devamatre.framework.spring.exception.InvalidRequestException;
-import com.devamatre.framework.spring.exception.NoRecordFoundException;
-import com.devamatre.framework.spring.filter.Filter;
-import com.devamatre.framework.spring.persistence.Operation;
-import com.devamatre.framework.spring.service.AbstractServiceImpl;
+import com.devamatre.appsuite.core.BeanUtils;
+import com.devamatre.appsuite.core.enums.EntityStatus;
+import com.devamatre.appsuite.core.enums.RoleType;
+import com.devamatre.appsuite.spring.exception.DuplicateRecordException;
+import com.devamatre.appsuite.spring.exception.InvalidRequestException;
+import com.devamatre.appsuite.spring.exception.NoRecordFoundException;
+import com.devamatre.appsuite.spring.filter.Filter;
+import com.devamatre.appsuite.spring.persistence.Operation;
+import com.devamatre.appsuite.spring.service.AbstractServiceImpl;
 import com.rslakra.services.automobile.domain.entities.AutoUser;
 import com.rslakra.services.automobile.domain.repositories.UserRepository;
 import com.rslakra.services.automobile.dto.LoginRequest;

@@ -1,9 +1,9 @@
 package com.rslakra.services.automobile.service.impl;
 
-import com.devamatre.framework.spring.exception.NoRecordFoundException;
-import com.devamatre.framework.spring.filter.Filter;
-import com.devamatre.framework.spring.persistence.Operation;
-import com.devamatre.framework.spring.service.AbstractServiceImpl;
+import com.devamatre.appsuite.spring.exception.NoRecordFoundException;
+import com.devamatre.appsuite.spring.filter.Filter;
+import com.devamatre.appsuite.spring.persistence.Operation;
+import com.devamatre.appsuite.spring.service.AbstractServiceImpl;
 import com.rslakra.services.automobile.domain.entities.ServiceType;
 import com.rslakra.services.automobile.domain.repositories.ServiceTypeRepository;
 import com.rslakra.services.automobile.service.ServiceTypeService;

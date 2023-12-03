@@ -1,8 +1,8 @@
 package com.rslakra.services.automobile.controller.web;
 
-import com.devamatre.framework.spring.controller.web.AbstractWebController;
-import com.devamatre.framework.spring.filter.Filter;
-import com.devamatre.framework.spring.parser.Parser;
+import com.devamatre.appsuite.spring.controller.web.AbstractWebController;
+import com.devamatre.appsuite.spring.filter.Filter;
+import com.devamatre.appsuite.spring.parser.Parser;
 import com.rslakra.services.automobile.domain.entities.ServiceType;
 import com.rslakra.services.automobile.service.ServiceTypeService;
 import org.springframework.beans.factory.annotation.Autowired;

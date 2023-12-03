@@ -3,7 +3,7 @@
  */
 package com.rslakra.services.automobile.domain.entities;
 
-import com.devamatre.framework.spring.persistence.entity.NamedEntity;
+import com.devamatre.appsuite.spring.persistence.entity.NamedEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,6 +20,6 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(name = "service_types")
-public class ServiceType extends NamedEntity {
+public class ServiceType extends NamedEntity<Long> {
 
 }

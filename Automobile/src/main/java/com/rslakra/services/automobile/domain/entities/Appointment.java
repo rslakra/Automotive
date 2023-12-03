@@ -1,16 +1,12 @@
 package com.rslakra.services.automobile.domain.entities;
 
-import com.devamatre.framework.core.BeanUtils;
-import com.devamatre.framework.spring.persistence.entity.AbstractEntity;
+import com.devamatre.appsuite.core.BeanUtils;
+import com.devamatre.appsuite.spring.persistence.entity.AbstractEntity;
 import com.rslakra.services.automobile.domain.entities.converter.LocalDateConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -22,6 +18,9 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Rohtash Lakra (rohtash.singh@gmail.com)

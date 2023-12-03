@@ -1,7 +1,7 @@
 package com.rslakra.services.automobile.domain.entities;
 
-import com.devamatre.framework.core.BeanUtils;
-import com.devamatre.framework.spring.persistence.entity.AbstractEntity;
+import com.devamatre.appsuite.core.BeanUtils;
+import com.devamatre.appsuite.spring.persistence.entity.AbstractEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,16 +9,15 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Rohtash Lakra (rohtash.singh@gmail.com)

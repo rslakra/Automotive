@@ -1,9 +1,9 @@
 package com.rslakra.services.automobile.controller.web;
 
-import com.devamatre.framework.core.enums.RoleType;
-import com.devamatre.framework.spring.controller.web.AbstractWebController;
-import com.devamatre.framework.spring.filter.Filter;
-import com.devamatre.framework.spring.parser.Parser;
+import com.devamatre.appsuite.core.enums.RoleType;
+import com.devamatre.appsuite.spring.controller.web.AbstractWebController;
+import com.devamatre.appsuite.spring.filter.Filter;
+import com.devamatre.appsuite.spring.parser.Parser;
 import com.rslakra.services.automobile.domain.entities.Appointment;
 import com.rslakra.services.automobile.domain.entities.AuthUtils;
 import com.rslakra.services.automobile.service.AppointmentService;
@@ -21,10 +21,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.security.RolesAllowed;
 
 @Controller
 @RequestMapping("/appointments")

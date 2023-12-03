@@ -1,6 +1,6 @@
 package com.rslakra.services.automobile.service.security.context;
 
-import com.devamatre.framework.core.BeanUtils;
+import com.devamatre.appsuite.core.BeanUtils;
 import com.rslakra.services.automobile.domain.entities.AutoUser;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -92,7 +92,7 @@ public enum ContextUtils {
      */
     public static boolean isAnonymousAuthToken(Authentication authentication) {
         return (Objects.nonNull(authentication) && authentication.getClass()
-            .equals(AnonymousAuthenticationToken.class));
+                .equals(AnonymousAuthenticationToken.class));
     }
 
     /**

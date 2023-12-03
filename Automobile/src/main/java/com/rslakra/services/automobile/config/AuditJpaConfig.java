@@ -1,6 +1,6 @@
 package com.rslakra.services.automobile.config;
 
-import com.devamatre.framework.spring.context.AuditorAwareImpl;
+import com.devamatre.appsuite.spring.context.AuditorAwareImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;

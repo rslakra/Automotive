@@ -1,6 +1,6 @@
 package com.rslakra.services.automobile.service.security.interceptor;
 
-import com.devamatre.framework.core.BeanUtils;
+import com.devamatre.appsuite.core.BeanUtils;
 import com.rslakra.services.automobile.service.security.context.ContextUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +30,7 @@ public class SessionTimerInterceptor implements HandlerInterceptor {
      */
     private Long getTimeSinceLastRequest(HttpSession httpSession) {
         return (BeanUtils.isNotNull(httpSession) ? System.currentTimeMillis() - httpSession.getLastAccessedTime()
-                                                 : System.currentTimeMillis());
+                : System.currentTimeMillis());
     }
 
     /**

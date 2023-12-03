@@ -1,6 +1,6 @@
 package com.rslakra.services.automobile.service;
 
-import com.devamatre.framework.spring.service.AbstractService;
+import com.devamatre.appsuite.spring.service.AbstractService;
 import com.rslakra.services.automobile.domain.entities.Appointment;
 
 /**
