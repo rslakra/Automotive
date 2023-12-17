@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.rslakra.services.automobile.domain.entities;
+package com.rslakra.services.automobile.service.security;
 
 import com.devamatre.appsuite.core.BeanUtils;
 import com.devamatre.appsuite.core.enums.RoleType;

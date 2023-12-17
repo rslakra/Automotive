@@ -5,8 +5,8 @@ import com.devamatre.appsuite.spring.controller.web.AbstractWebController;
 import com.devamatre.appsuite.spring.filter.Filter;
 import com.devamatre.appsuite.spring.parser.Parser;
 import com.rslakra.services.automobile.domain.entities.Appointment;
-import com.rslakra.services.automobile.domain.entities.AuthUtils;
 import com.rslakra.services.automobile.service.AppointmentService;
+import com.rslakra.services.automobile.service.security.AuthUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +21,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.security.RolesAllowed;
 
 @Controller
 @RequestMapping("/appointments")
@@ -102,7 +103,7 @@ public class AppointmentController extends AbstractWebController<Appointment, Lo
      * @return
      */
     @GetMapping("/{id}")
-//	@PostAuthorize("returnObject == 'appointment'")
+    // @PostAuthorize("returnObject == 'appointment'")
     @PostAuthorize("hasPermission(#model['appointment'],'read')")
     public String getAppointment(@PathVariable("id") Long id, Model model) {
         LOGGER.debug("+getAppointment({})", id, model);
@@ -126,7 +127,7 @@ public class AppointmentController extends AbstractWebController<Appointment, Lo
      * @return
      */
     @GetMapping("/confirm/{id}")
-//	@RolesAllowed("ROLE_ADMIN")
+    // @RolesAllowed("ROLE_ADMIN")
     @PostAuthorize("hasPermission(returnObject,'administration')")
     public Appointment confirm(@PathVariable("id") Long id) {
         LOGGER.debug("confirm({})", id);

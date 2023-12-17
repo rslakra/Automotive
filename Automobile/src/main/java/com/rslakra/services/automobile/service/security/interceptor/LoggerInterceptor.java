@@ -6,10 +6,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
 import java.util.Objects;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class LoggerInterceptor implements HandlerInterceptor {
 
@@ -26,7 +27,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
         final int hashCode = Objects.hashCode(servletRequest);
         servletRequest.setAttribute(HASH_CODE, hashCode);
         LOGGER.info("preHandle(), servletRequest:{}, method: {}, requestURI: {}, parameters: {}", servletRequest,
-                servletRequest.getMethod(), servletRequest.getRequestURI(), getParameters(servletRequest));
+                    servletRequest.getMethod(), servletRequest.getRequestURI(), getParameters(servletRequest));
         return true;
     }
 

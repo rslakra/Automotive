@@ -174,20 +174,7 @@ public class AppointmentServiceImpl extends AbstractServiceImpl<Appointment, Lon
     @PreFilter("principal.id == filterObject.user.id")
     public String saveAll(List<Appointment> appointments) {
         return appointments.stream().map(appointment -> appointment.getUser().getEmail())
-                .collect(Collectors.joining(" "));
-//		final StringBuilder userAppointments = new StringBuilder();
-//
-//		//
-//		if (!Objects.isNull(appointments)) {
-//			appointments.forEach(appointment -> {
-//				if (userAppointments.length() > 0) {
-//					userAppointments.append(" ");
-//				}
-//				userAppointments.append(appointment.getUser().getEmail());
-//			});
-//		}
-//
-//		return userAppointments.toString();
+            .collect(Collectors.joining(" "));
     }
 
     /**

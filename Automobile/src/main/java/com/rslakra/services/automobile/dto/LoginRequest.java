@@ -11,6 +11,6 @@ public class LoginRequest {
 
     private String username;
     private String password;
-    private String _csrf;
+    private String csrf;
 
 }
