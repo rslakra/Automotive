@@ -7,7 +7,7 @@ import com.devamatre.appsuite.spring.exception.DuplicateRecordException;
 import com.devamatre.appsuite.spring.exception.InvalidRequestException;
 import com.devamatre.appsuite.spring.exception.NoRecordFoundException;
 import com.devamatre.appsuite.spring.filter.Filter;
-import com.devamatre.appsuite.spring.persistence.Operation;
+import com.devamatre.appsuite.spring.persistence.ServiceOperation;
 import com.devamatre.appsuite.spring.service.AbstractServiceImpl;
 import com.rslakra.automobile.domain.entities.AutoUser;
 import com.rslakra.automobile.domain.repositories.UserRepository;
@@ -108,7 +108,7 @@ public class AuthServiceImpl extends AbstractServiceImpl<AutoUser, Long> impleme
      * @return
      */
     @Override
-    public AutoUser validate(Operation operation, AutoUser autoUser) {
+    public AutoUser validate(ServiceOperation operation, AutoUser autoUser) {
         return null;
     }
 

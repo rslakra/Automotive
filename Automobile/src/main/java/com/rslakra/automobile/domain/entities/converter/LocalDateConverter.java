@@ -10,7 +10,7 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 /**
- * @author Rohtash Lakra (rohtash.singh@gmail.com)
+ * @author Rohtash Lakra
  * @since 09-16-2019 1:33:16 PM
  */
 @Converter(autoApply = true)

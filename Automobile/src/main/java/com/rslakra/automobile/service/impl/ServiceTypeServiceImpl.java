@@ -2,7 +2,7 @@ package com.rslakra.automobile.service.impl;
 
 import com.devamatre.appsuite.spring.exception.NoRecordFoundException;
 import com.devamatre.appsuite.spring.filter.Filter;
-import com.devamatre.appsuite.spring.persistence.Operation;
+import com.devamatre.appsuite.spring.persistence.ServiceOperation;
 import com.devamatre.appsuite.spring.service.AbstractServiceImpl;
 import com.rslakra.automobile.domain.entities.ServiceType;
 import com.rslakra.automobile.domain.repositories.ServiceTypeRepository;
@@ -41,7 +41,7 @@ public class ServiceTypeServiceImpl extends AbstractServiceImpl<ServiceType, Lon
      * @return
      */
     @Override
-    public ServiceType validate(Operation operation, ServiceType serviceType) {
+    public ServiceType validate(ServiceOperation operation, ServiceType serviceType) {
         return null;
     }
 

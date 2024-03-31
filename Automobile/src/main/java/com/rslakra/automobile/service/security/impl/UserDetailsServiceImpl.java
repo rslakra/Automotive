@@ -24,7 +24,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 /**
- * @author Rohtash Lakra (rohtash.singh@gmail.com)
+ * @author Rohtash Lakra
  * @since 01-04-2019 1:38:56 PM
  */
 @Service("userDetailsService")

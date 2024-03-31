@@ -5,7 +5,7 @@ import com.devamatre.appsuite.core.enums.EntityStatus;
 import com.devamatre.appsuite.spring.exception.AuthenticationException;
 import com.devamatre.appsuite.spring.exception.NoRecordFoundException;
 import com.devamatre.appsuite.spring.filter.Filter;
-import com.devamatre.appsuite.spring.persistence.Operation;
+import com.devamatre.appsuite.spring.persistence.ServiceOperation;
 import com.devamatre.appsuite.spring.service.AbstractServiceImpl;
 import com.rslakra.automobile.domain.entities.Appointment;
 import com.rslakra.automobile.domain.entities.AutoUser;
@@ -48,7 +48,7 @@ public class AppointmentServiceImpl extends AbstractServiceImpl<Appointment, Lon
      * @return
      */
     @Override
-    public Appointment validate(Operation operation, Appointment appointment) {
+    public Appointment validate(ServiceOperation operation, Appointment appointment) {
         return null;
     }
 
