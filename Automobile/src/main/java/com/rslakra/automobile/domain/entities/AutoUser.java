@@ -1,7 +1,7 @@
 package com.rslakra.automobile.domain.entities;
 
-import com.devamatre.appsuite.core.BeanUtils;
-import com.devamatre.appsuite.spring.persistence.entity.AbstractEntity;
+import com.rslakra.appsuite.core.BeanUtils;
+import com.rslakra.appsuite.spring.persistence.entity.AbstractEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;

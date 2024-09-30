@@ -1,6 +1,6 @@
 package com.rslakra.automobile.service;
 
-import com.devamatre.appsuite.spring.service.AbstractService;
+import com.rslakra.appsuite.spring.service.AbstractService;
 import com.rslakra.automobile.domain.entities.AutoUser;
 import com.rslakra.automobile.dto.LoginRequest;
 

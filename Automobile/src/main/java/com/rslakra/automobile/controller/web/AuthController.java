@@ -1,6 +1,6 @@
 package com.rslakra.automobile.controller.web;
 
-import com.devamatre.appsuite.core.BeanUtils;
+import com.rslakra.appsuite.core.BeanUtils;
 import com.rslakra.automobile.domain.entities.AutoUser;
 import com.rslakra.automobile.dto.LoginRequest;
 import com.rslakra.automobile.service.AuthService;

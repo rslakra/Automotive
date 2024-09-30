@@ -1,8 +1,8 @@
 package com.rslakra.automobile.controller.rest;
 
-import com.devamatre.appsuite.core.Payload;
-import com.devamatre.appsuite.spring.controller.rest.AbstractRestController;
-import com.devamatre.appsuite.spring.filter.Filter;
+import com.rslakra.appsuite.core.Payload;
+import com.rslakra.appsuite.spring.controller.rest.AbstractRestController;
+import com.rslakra.appsuite.spring.filter.Filter;
 import com.rslakra.automobile.domain.entities.Appointment;
 import com.rslakra.automobile.filter.AppointmentFilter;
 import com.rslakra.automobile.service.AppointmentService;

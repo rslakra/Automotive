@@ -1,6 +1,6 @@
 package com.rslakra.automobile.service.security;
 
-import com.devamatre.appsuite.core.BeanUtils;
+import com.rslakra.appsuite.core.BeanUtils;
 import com.rslakra.automobile.service.security.context.ContextUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

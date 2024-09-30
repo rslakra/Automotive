@@ -3,8 +3,8 @@
  */
 package com.rslakra.automobile.service.security;
 
-import com.devamatre.appsuite.core.BeanUtils;
-import com.devamatre.appsuite.core.enums.RoleType;
+import com.rslakra.appsuite.core.BeanUtils;
+import com.rslakra.appsuite.core.enums.RoleType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

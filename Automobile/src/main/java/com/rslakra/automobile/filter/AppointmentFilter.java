@@ -1,6 +1,6 @@
 package com.rslakra.automobile.filter;
 
-import com.devamatre.appsuite.spring.filter.AbstractFilter;
+import com.rslakra.appsuite.spring.filter.AbstractFilter;
 import com.rslakra.automobile.domain.entities.Appointment;
 
 import java.util.Map;

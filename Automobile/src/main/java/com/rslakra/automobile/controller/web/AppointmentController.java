@@ -1,9 +1,9 @@
 package com.rslakra.automobile.controller.web;
 
-import com.devamatre.appsuite.core.enums.RoleType;
-import com.devamatre.appsuite.spring.controller.web.AbstractWebController;
-import com.devamatre.appsuite.spring.filter.Filter;
-import com.devamatre.appsuite.spring.parser.Parser;
+import com.rslakra.appsuite.core.enums.RoleType;
+import com.rslakra.appsuite.spring.controller.web.AbstractWebController;
+import com.rslakra.appsuite.spring.filter.Filter;
+import com.rslakra.appsuite.spring.parser.Parser;
 import com.rslakra.automobile.service.AppointmentService;
 import com.rslakra.automobile.domain.entities.Appointment;
 import com.rslakra.automobile.service.security.AuthUtils;
