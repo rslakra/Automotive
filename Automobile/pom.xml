@@ -7,17 +7,17 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.8</version>
+        <version>2.7.18</version>
         <!-- lookup parent from repository -->
         <relativePath/>
     </parent>
     <!-- services -->
-    <groupId>com.rslakra.services.automobiles</groupId>
+    <groupId>com.rslakra.services.automotive</groupId>
     <artifactId>automobile</artifactId>
     <version>${revision}</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
-    <description>The ${project.artifactId} Application</description>
+    <description>The ${project.artifactId} Service</description>
 
     <!-- properties -->
     <properties>
@@ -29,13 +29,13 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- java version -->
-        <java.version>23</java.version>
+        <java.version>21</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <!-- maven plugins -->
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+        <maven-checkstyle-plugin.version>3.5.0</maven-checkstyle-plugin.version>
         <maven-release-plugin.version>3.0.0</maven-release-plugin.version>
 
         <!-- checkstyle -->
@@ -43,12 +43,12 @@
         <checkstyle.threshold>0</checkstyle.threshold>
 
         <!-- appsuite-core -->
-        <appsuite-core.version>0.0.34</appsuite-core.version>
+        <appsuite-core.version>0.0.64</appsuite-core.version>
         <!-- appsuite-spring -->
         <appsuite-spring.version>0.0.15</appsuite-spring.version>
 
         <!-- lombok -->
-        <lombok.version>1.18.28</lombok.version>
+        <lombok.version>1.18.34</lombok.version>
 
         <!-- swagger -->
         <swagger.skip>false</swagger.skip>
@@ -66,7 +66,7 @@
         <mainClassPath>com.rslakra.automobile.AutomobileApplication</mainClassPath>
 
         <!-- junit-jupiter-params -->
-        <junit-jupiter-params.version>5.9.2</junit-jupiter-params.version>
+        <junit-jupiter-params.version>5.10.2</junit-jupiter-params.version>
 
     </properties>
 
@@ -148,11 +148,11 @@
         </dependency>
 
         <!--uncomment below if deploying in web container -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-tomcat</artifactId>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
 
         <!-- spring-boot-test -->
         <dependency>
@@ -203,7 +203,7 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>${maven-checkstyle-plugin.version}</version>
                 <configuration>
-                    <configLocation>${code-styles.dir}/checkstyle.xml</configLocation>
+                    <configLocation>${code-styles.dir}/styles.xml</configLocation>
                     <propertiesLocation>${code-styles.dir}/checkstyle.properties</propertiesLocation>
                 </configuration>
                 <executions>
