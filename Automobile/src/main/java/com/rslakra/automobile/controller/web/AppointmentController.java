@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.annotation.security.RolesAllowed;
 
@@ -197,7 +198,7 @@ public class AppointmentController extends AbstractWebController<Appointment, Lo
      * @return
      */
     @Override
-    public String editObject(Model model, Long idOptional) {
+    public String editObject(Model model, Optional<Long> idOptional) {
         LOGGER.debug("editObject({}, {})", model, idOptional);
         return null;
     }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author Rohtash Lakra
@@ -94,7 +95,7 @@ public class ServiceController extends AbstractWebController<ServiceType, Long> 
      * @return
      */
     @Override
-    public String editObject(Model model, Long idOptional) {
+    public String editObject(Model model, Optional<Long> idOptional) {
         return null;
     }
 
