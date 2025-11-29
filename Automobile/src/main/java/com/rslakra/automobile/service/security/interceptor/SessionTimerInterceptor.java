@@ -8,15 +8,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class SessionTimerInterceptor implements HandlerInterceptor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SessionTimerInterceptor.class);
 
-    private static final long MAX_INACTIVE_SESSION_TIME = 5 * 10000;
+    // 30 minutes in milliseconds
+    private static final long MAX_INACTIVE_SESSION_TIME = 5 * 60 * 1000;
     private static final String EXECUTION_TIME_ATTR = "executionTime";
 
     private HttpSession httpSession;
@@ -58,6 +59,8 @@ public class SessionTimerInterceptor implements HandlerInterceptor {
                 SecurityContextHolder.clearContext();
                 servletRequest.logout();
                 servletResponse.sendRedirect("/logout");
+                LOGGER.info("-preHandle(), false (session timeout redirect)");
+                return false;
             }
         }
 

@@ -8,5 +8,6 @@ package com.rslakra.automobile.domain.entities;
  * @since 01-03-2020 4:03:58 PM
  */
 public enum AuthType {
-	ROLE_USER, ROLE_ADMIN;
+    ROLE_USER, ROLE_ADMIN;
 }
+

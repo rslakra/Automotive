@@ -20,6 +20,21 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
      * @param user
      * @return
      */
-    public List<Appointment> findByUser(AutoUser user);
+    List<Appointment> findByUser(AutoUser user);
 
+    /**
+     * Returns the appointments of the given user, sorted by date and start time ascending.
+     *
+     * @param user
+     * @return
+     */
+    List<Appointment> findByUserOrderByAppointmentOnAscStartTimeAsc(AutoUser user);
+
+    /**
+     * Returns all appointments sorted by date and start time ascending (for admin).
+     *
+     * @return
+     */
+    List<Appointment> findAllByOrderByAppointmentOnAscStartTimeAsc();
 }
+

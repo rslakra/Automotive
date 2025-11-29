@@ -11,10 +11,27 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class PasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+
+    /**
+     * Only process POST requests to the login URL.
+     * GET requests should be handled by the controller to display the login page.
+     *
+     * @param request
+     * @param response
+     * @return true if this filter should process the request
+     */
+    @Override
+    protected boolean requiresAuthentication(HttpServletRequest request, HttpServletResponse response) {
+        // Only process POST requests
+        if (!HttpMethod.POST.matches(request.getMethod())) {
+            return false;
+        }
+        return super.requiresAuthentication(request, response);
+    }
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PasswordAuthenticationFilter.class);
     public static final String SPRING_SECURITY_FORM_USER_NAME_KEY = "userName";

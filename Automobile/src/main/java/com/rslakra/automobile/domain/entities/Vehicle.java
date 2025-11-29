@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 
 /**
  * @author Rohtash Lakra
@@ -23,7 +23,7 @@ public class Vehicle {
     @Column(name = "model")
     private String model;
 
-    @Column(name = "year")
+    @Column(name = "\"year\"")
     private Short year;
 
 }

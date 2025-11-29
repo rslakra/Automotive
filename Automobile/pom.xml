@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.18</version>
+        <version>3.5.7</version>
         <!-- lookup parent from a repository -->
         <relativePath/>
     </parent>
@@ -59,9 +59,6 @@
         <!-- h2 -->
         <h2.version>2.3.232</h2.version>
 
-        <!-- jstl -->
-        <jstl.version>1.2</jstl.version>
-
         <!-- mainClassPath -->
         <mainClassPath>com.rslakra.automobile.AutomobileApplication</mainClassPath>
 
@@ -110,23 +107,16 @@
             <version>${h2.version}</version>
         </dependency>
 
-        <!-- JSP -->
+        <!-- Thymeleaf -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>${jstl.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
+        <!-- Thymeleaf Spring Security integration -->
         <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-jasper</artifactId>
-            <!--uncomment below if deploying in web container -->
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-taglibs</artifactId>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
         </dependency>
 
         <!-- spring-boot -->

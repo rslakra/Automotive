@@ -1,13 +1,13 @@
 package com.rslakra.automobile.service.impl;
 
 import com.rslakra.appsuite.core.BeanUtils;
-import com.rslakra.appsuite.core.enums.EntityStatus;
 import com.rslakra.appsuite.spring.exception.AuthenticationException;
 import com.rslakra.appsuite.spring.exception.NoRecordFoundException;
 import com.rslakra.appsuite.spring.filter.Filter;
 import com.rslakra.appsuite.spring.persistence.ServiceOperation;
 import com.rslakra.appsuite.spring.service.AbstractServiceImpl;
 import com.rslakra.automobile.domain.entities.Appointment;
+import com.rslakra.automobile.domain.entities.AppointmentStatus;
 import com.rslakra.automobile.domain.entities.AutoUser;
 import com.rslakra.automobile.domain.repositories.AppointmentRepository;
 import com.rslakra.automobile.service.AppointmentService;
@@ -49,7 +49,7 @@ public class AppointmentServiceImpl extends AbstractServiceImpl<Appointment, Lon
      */
     @Override
     public Appointment validate(ServiceOperation operation, Appointment appointment) {
-        return null;
+        return appointment;
     }
 
     /**
@@ -60,8 +60,8 @@ public class AppointmentServiceImpl extends AbstractServiceImpl<Appointment, Lon
     public Appointment create(Appointment appointment) {
         AutoUser autoUser = (AutoUser) ContextUtils.INSTANCE.getAuthentication().getPrincipal();
         appointment.setUser(autoUser);
-        if (BeanUtils.isEmpty(appointment.getStatus())) {
-            appointment.setStatus(EntityStatus.INACTIVE.name());
+        if (appointment.getStatus() == null) {
+            appointment.setStatus(AppointmentStatus.PENDING);
         }
         appointment = appointmentRepository.save(appointment);
         return appointment;
@@ -95,17 +95,48 @@ public class AppointmentServiceImpl extends AbstractServiceImpl<Appointment, Lon
         } catch (Exception ex) {
             LOGGER.error(ex.getLocalizedMessage(), ex);
             appointments = new ArrayList<>();
-            Appointment appointment = new Appointment();
-            appointment.setId(1L);
-            appointment.addService("Oil Change");
-            appointment.addService("Break Oil Change");
-            appointment.setUser(autoUser);
-// appointment.setAppointmentOn(LocalDate.now());
-            appointment.setStatus("Active");
-            appointments.add(appointment);
         }
 
         LOGGER.debug("+getAll(), appointments: {}", appointments);
+        return appointments;
+    }
+
+    /**
+     * Returns appointments for the current user.
+     * Admin users see all appointments sorted by date/time.
+     * Regular users see only their own appointments sorted by date/time.
+     *
+     * @return
+     */
+    @Override
+    public List<Appointment> getAppointmentsForCurrentUser() {
+        LOGGER.debug("+getAppointmentsForCurrentUser()");
+        AutoUser autoUser = ContextUtils.getLoggedInUser();
+        if (BeanUtils.isNull(autoUser)) {
+            throw new AuthenticationException();
+        }
+
+        List<Appointment> appointments;
+        try {
+            // Check if user is admin
+            boolean isAdmin = autoUser.getAuthorities().stream()
+                .anyMatch(auth -> auth.getAuthority().equals("ADMIN") || auth.getAuthority().equals("ROLE_ADMIN"));
+            
+            if (isAdmin) {
+                // Admin sees all appointments sorted by date/time
+                appointments = appointmentRepository.findAllByOrderByAppointmentOnAscStartTimeAsc();
+                LOGGER.debug("Admin user - returning all {} appointments", appointments.size());
+            } else {
+                // Regular user sees only their appointments sorted by date/time
+                appointments = appointmentRepository.findByUserOrderByAppointmentOnAscStartTimeAsc(autoUser);
+                LOGGER.debug("Regular user {} - returning {} appointments", autoUser.getEmail(), appointments.size());
+            }
+        } catch (Exception ex) {
+            LOGGER.error(ex.getLocalizedMessage(), ex);
+            appointments = new ArrayList<>();
+        }
+
+        LOGGER.debug("-getAppointmentsForCurrentUser(), count: {}", appointments.size());
         return appointments;
     }
 
@@ -143,7 +174,10 @@ public class AppointmentServiceImpl extends AbstractServiceImpl<Appointment, Lon
      */
     @Override
     public Appointment update(Appointment appointment) {
-        return null;
+        LOGGER.debug("+update({})", appointment);
+        appointment = appointmentRepository.save(appointment);
+        LOGGER.debug("-update(), appointment: {}", appointment);
+        return appointment;
     }
 
     /**

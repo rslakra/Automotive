@@ -1,5 +1,7 @@
 package com.rslakra.automobile.service.impl;
 
+import com.rslakra.appsuite.core.BeanUtils;
+import com.rslakra.appsuite.core.enums.EntityStatus;
 import com.rslakra.appsuite.spring.exception.NoRecordFoundException;
 import com.rslakra.appsuite.spring.filter.Filter;
 import com.rslakra.appsuite.spring.persistence.ServiceOperation;
@@ -51,7 +53,13 @@ public class ServiceTypeServiceImpl extends AbstractServiceImpl<ServiceType, Lon
      */
     @Override
     public ServiceType create(ServiceType serviceType) {
+        LOGGER.debug("+create({})", serviceType);
+        // Set default status if not provided
+        if (BeanUtils.isEmpty(serviceType.getStatus())) {
+            serviceType.setStatus(EntityStatus.ACTIVE.name());
+        }
         serviceType = serviceTypeRepository.save(serviceType);
+        LOGGER.debug("-create(), serviceType: {}", serviceType);
         return serviceType;
     }
 

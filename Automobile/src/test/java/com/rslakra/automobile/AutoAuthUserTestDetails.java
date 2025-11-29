@@ -2,7 +2,9 @@ package com.rslakra.automobile;
 
 import com.rslakra.automobile.domain.entities.Appointment;
 import com.rslakra.automobile.domain.entities.AutoUser;
+import com.rslakra.automobile.domain.entities.ServiceType;
 import com.rslakra.automobile.domain.entities.Vehicle;
+import com.rslakra.automobile.domain.repositories.ServiceTypeRepository;
 import com.rslakra.automobile.domain.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -25,6 +27,10 @@ public class AutoAuthUserTestDetails {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ServiceTypeRepository serviceTypeRepository;
+
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     /**
@@ -53,12 +59,23 @@ public class AutoAuthUserTestDetails {
         autoUser.setLastName("Lakra");
         autoUser.setStatus("Test");
 
+        // Create and save ServiceType entities
+        ServiceType tireChange = new ServiceType();
+        tireChange.setName("Tire Change");
+        tireChange.setStatus("ACTIVE");
+        tireChange = serviceTypeRepository.save(tireChange);
+
+        ServiceType oilChange = new ServiceType();
+        oilChange.setName("Oil Change");
+        oilChange.setStatus("ACTIVE");
+        oilChange = serviceTypeRepository.save(oilChange);
+
         Appointment appointment = new Appointment();
         appointment.setId(autoUser.getId());
         appointment.setAppointmentOn(LocalDate.now());
         appointment.setUser(autoUser);
         appointment.setVehicle(vehicle);
-        appointment.setServices(Arrays.asList("Tire Change", "Oil Change"));
+        appointment.setServices(Arrays.asList(tireChange, oilChange));
         autoUser.getAppointments().add(appointment);
 
         autoUser = userRepository.save(autoUser);

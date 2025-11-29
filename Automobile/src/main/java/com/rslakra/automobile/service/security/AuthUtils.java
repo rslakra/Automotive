@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.rslakra.automobile.service.security;
 
 import com.rslakra.appsuite.core.BeanUtils;

@@ -9,19 +9,22 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 /**
  * @author Rohtash Lakra
@@ -42,27 +45,54 @@ public class Appointment extends AbstractEntity<Long> {
     private Vehicle vehicle;
 
     @Convert(converter = LocalDateConverter.class)
-    @DateTimeFormat(pattern = "MM-dd-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "appointment_on")
     private LocalDate appointmentOn;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "services", joinColumns = {@JoinColumn(name = "appointment_id")})
-    @Column(name = "name")
-    private List<String> services = new ArrayList<>();
+    @DateTimeFormat(pattern = "HH:mm")
+    @Column(name = "start_time")
+    private LocalTime startTime;
 
+    @DateTimeFormat(pattern = "HH:mm")
+    @Column(name = "end_time")
+    private LocalTime endTime;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "schedule_id")
+    private Schedule schedule;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "appointment_services",
+        joinColumns = @JoinColumn(name = "appointment_id"),
+        inverseJoinColumns = @JoinColumn(name = "service_type_id")
+    )
+    private List<ServiceType> services = new ArrayList<>();
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private String status;
+    private AppointmentStatus status;
 
     /**
-     * @param service
+     * @param serviceType
      */
-    public void addService(String service) {
+    public void addService(ServiceType serviceType) {
         if (BeanUtils.isNull(services)) {
             services = new ArrayList<>();
         }
 
-        getServices().add(service);
+        getServices().add(serviceType);
+    }
+
+    /**
+     * Returns formatted time range.
+     * @return
+     */
+    public String getTimeRange() {
+        if (startTime != null && endTime != null) {
+            return String.format("%s - %s", startTime, endTime);
+        }
+        return "";
     }
 
 }
