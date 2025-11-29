@@ -8,8 +8,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 /**
  * @author Rohtash Lakra
@@ -21,5 +22,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "service_types")
 public class ServiceType extends NamedEntity<Long> {
+
+    @Column(name = "status")
+    private String status;
 
 }

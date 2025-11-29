@@ -1,6 +1,5 @@
 package com.rslakra.automobile.config;
 
-import com.rslakra.appsuite.spring.context.AuditorAwareImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -19,6 +18,7 @@ public class AuditJpaConfig {
      */
     @Bean
     public AuditorAware<String> auditorAware() {
-        return new AuditorAwareImpl();
+        return new SafeAuditorAwareImpl();
     }
 }
+

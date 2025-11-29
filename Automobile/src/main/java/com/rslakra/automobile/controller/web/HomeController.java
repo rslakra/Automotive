@@ -40,19 +40,11 @@ public class HomeController {
     }
 
     /**
-     * @return
-     */
-    @GetMapping("/schedules")
-    public String schedulesPage() {
-        return "schedules";
-    }
-
-    /**
      * Displays the register page.
      *
      * @return
      */
-    @GetMapping("/register")
+    @GetMapping({"/register", "/register/"})
     public String registerPage() {
         return "register";
     }
@@ -60,7 +52,7 @@ public class HomeController {
     /**
      * @return
      */
-    @GetMapping("/login")
+    @GetMapping({"/login", "/login/"})
     public String loginPage() {
         return "login";
     }

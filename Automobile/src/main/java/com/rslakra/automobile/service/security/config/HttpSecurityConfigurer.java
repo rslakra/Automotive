@@ -9,8 +9,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +20,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+@Configuration
 @EnableWebSecurity
 public class HttpSecurityConfigurer extends AbstractHttpConfigurer<HttpSecurityConfigurer, HttpSecurity> {
 
@@ -52,6 +55,17 @@ public class HttpSecurityConfigurer extends AbstractHttpConfigurer<HttpSecurityC
     }
 
     /**
+     * Completely ignore H2 console from Spring Security
+     * 
+     * @return
+     */
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        LOGGER.debug("webSecurityCustomizer()");
+        return (web) -> web.ignoring().requestMatchers("/h2/**");
+    }
+
+    /**
      * @param http
      * @return
      * @throws Exception
@@ -61,28 +75,48 @@ public class HttpSecurityConfigurer extends AbstractHttpConfigurer<HttpSecurityC
         LOGGER.debug("filterChain({})", http);
         /* Allow frames only with the same origin, which is much more safe. */
         http
-            .headers().frameOptions().disable()
-            .and()
-            /* Ignore only h2-console csrf, spring-security 4. */
-            .csrf().ignoringAntMatchers("/h2/**")
-            .and()
+            .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
+            /* Ignore only h2-console csrf, spring-security 6. */
+            .csrf(csrf -> csrf.ignoringRequestMatchers("/h2/**"))
             /* Authorization */
-            .authorizeRequests()
-            /* Testing API - remove it in production */
-            .antMatchers("/auth/**", "/rest/**")
-            .permitAll()
-            .antMatchers("/h2/**")
-            .permitAll()
-            .antMatchers("/css/**", "/js/**", "/*.html", "/resources/**")
-            .permitAll()
-            .and()
-            .formLogin()
-            .loginPage("/login")
-            .and()
-            .logout()
-            .logoutUrl("/logout")
-            .and()
-            .apply(httpSecurityConfigurer());
+            .authorizeHttpRequests(auth -> auth
+                /* H2 Console - must be first */
+                .requestMatchers("/h2/**")
+                .permitAll()
+                /* Testing API - remove it in production */
+                .requestMatchers("/auth/**", "/rest/**")
+                .permitAll()
+                /* Static resources */
+                .requestMatchers("/css/**", "/js/**", "/*.html", "/resources/**")
+                .permitAll()
+                /* Public pages */
+                .requestMatchers("/", "/home", "/services/**", "/schedules/**")
+                .permitAll()
+                /* Login and Register pages */
+                .requestMatchers("/login", "/login/**", "/register", "/register/**")
+                .permitAll()
+                /* Hidden Admin Registration */
+                .requestMatchers("/admin/register")
+                .permitAll()
+                /* Error page */
+                .requestMatchers("/error")
+                .permitAll()
+                .anyRequest().authenticated()
+            )
+            .formLogin(form -> form
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .usernameParameter("userName")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/", true)
+                .failureUrl("/login?error=true")
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout=true")
+                .permitAll()
+            );
 
         return http.build();
     }
@@ -97,6 +131,8 @@ public class HttpSecurityConfigurer extends AbstractHttpConfigurer<HttpSecurityC
         PasswordAuthenticationFilter passwordAuthFilter = new PasswordAuthenticationFilter(passwordEncoder);
         passwordAuthFilter.setAuthenticationManager(authenticationManager);
         passwordAuthFilter.setAuthenticationFailureHandler(failureHandler());
+        // Set the login URL so the filter only processes login requests
+        passwordAuthFilter.setFilterProcessesUrl("/login");
         LOGGER.debug("-authenticationFilter(), passwordAuthFilter: {}", passwordAuthFilter);
         return passwordAuthFilter;
     }

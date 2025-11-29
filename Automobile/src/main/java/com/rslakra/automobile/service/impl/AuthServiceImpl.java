@@ -74,18 +74,23 @@ public class AuthServiceImpl extends AbstractServiceImpl<AutoUser, Long> impleme
      * @param autoUser
      */
     protected void addStatus(AutoUser autoUser) {
-        if (BeanUtils.isEmpty(autoUser.getStatus())) {
+        String status = autoUser.getStatus();
+        // Default to INACTIVE for new registrations (null, empty, or blank)
+        if (status == null || status.trim().isEmpty()) {
             autoUser.setStatus(EntityStatus.INACTIVE.name());
         } else {
-            EntityStatus entityStatus = EntityStatus.ofString(autoUser.getStatus());
-            if (EntityStatus.ACTIVE == entityStatus) {
+            EntityStatus entityStatus = EntityStatus.ofString(status);
+            if (entityStatus == null) {
+                // Unknown status - default to INACTIVE
+                autoUser.setStatus(EntityStatus.INACTIVE.name());
+            } else if (EntityStatus.ACTIVE == entityStatus) {
                 autoUser.setStatus(EntityStatus.ACTIVE.name());
             } else if (EntityStatus.INACTIVE == entityStatus) {
                 autoUser.setStatus(EntityStatus.INACTIVE.name());
             } else if (EntityStatus.DELETED == entityStatus) {
                 autoUser.setStatus(EntityStatus.DELETED.name());
             } else {
-                throw new InvalidRequestException("Invalid Status!");
+                autoUser.setStatus(EntityStatus.INACTIVE.name());
             }
         }
     }

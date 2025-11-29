@@ -194,4 +194,79 @@
         </createTable>
     </changeSet>
 
+    <!-- Create appointment_services join table for ManyToMany relationship -->
+    <changeSet author="rslakra" id="create_appointment_services_table">
+        <createTable tableName="appointment_services">
+            <column name="appointment_id" type="BIGINT">
+                <constraints foreignKeyName="fk_appt_svc_appointment"
+                             referencedTableName="appointments" referencedColumnNames="id"
+                             nullable="false"/>
+            </column>
+            <column name="service_type_id" type="BIGINT">
+                <constraints foreignKeyName="fk_appt_svc_service_type"
+                             referencedTableName="service_types" referencedColumnNames="id"
+                             nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="appointment_services" 
+                       columnNames="appointment_id, service_type_id"
+                       constraintName="pk_appointment_services"/>
+    </changeSet>
+
+    <!-- schedules -->
+    <changeSet author="rslakra" id="create_schedules_table">
+        <createTable tableName="schedules">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_schedule_id"
+                             unique="true" uniqueConstraintName="uk_schedule_id"
+                             nullable="false"/>
+            </column>
+            <column name="name" type="varchar(64)"/>
+            <column name="schedule_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_time" type="TIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_time" type="TIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="available" type="BOOLEAN" defaultValueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="max_appointments" type="INT" defaultValueNumeric="1"/>
+            <column name="current_appointments" type="INT" defaultValueNumeric="0"/>
+            <column name="created_on" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="java.sql.Timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_on" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="java.sql.Timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Add time fields and schedule reference to appointments -->
+    <changeSet author="rslakra" id="add_time_to_appointments">
+        <addColumn tableName="appointments">
+            <column name="start_time" type="TIME"/>
+            <column name="end_time" type="TIME"/>
+            <column name="schedule_id" type="BIGINT">
+                <constraints foreignKeyName="fk_appointment_schedule"
+                             referencedTableName="schedules" referencedColumnNames="id"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

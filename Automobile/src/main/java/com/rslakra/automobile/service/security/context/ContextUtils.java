@@ -47,6 +47,9 @@ public enum ContextUtils {
      */
     public static AutoUser getLoggedInUser() {
         final Authentication authentication = INSTANCE.getAuthentication();
+        if (authentication == null || authentication.getPrincipal() == null) {
+            return null;
+        }
         return (AutoUser) ((authentication.getPrincipal() instanceof AutoUser) ? authentication.getPrincipal() : null);
     }
 
@@ -54,7 +57,11 @@ public enum ContextUtils {
      * @return
      */
     public static String getLoggedInUsername() {
-        return INSTANCE.getAuthentication().getName();
+        final Authentication authentication = INSTANCE.getAuthentication();
+        if (authentication == null) {
+            return null;
+        }
+        return authentication.getName();
     }
 
     /**
@@ -101,11 +108,13 @@ public enum ContextUtils {
     public static Optional<String> getDomain() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String domain = null;
-        if (!isAnonymousAuthToken(authentication)) {
+        if (authentication != null && !isAnonymousAuthToken(authentication) 
+                && authentication.getPrincipal() instanceof AutoUser) {
             AutoUser autoUser = (AutoUser) authentication.getPrincipal();
-// domain = autoUser.getDomain();
+            // domain = autoUser.getDomain();
         }
 
         return Optional.ofNullable(domain);
     }
 }
+

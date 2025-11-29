@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -59,10 +61,19 @@ public class ServiceController extends AbstractWebController<ServiceType, Long> 
      * @param serviceType
      * @return
      */
+    @PostMapping("/save")
     @Override
-    public String save(ServiceType serviceType) {
+    public String save(@ModelAttribute ServiceType serviceType) {
         serviceType = serviceTypeService.create(serviceType);
-        return "services";
+        return "redirect:/services";
+    }
+
+    /**
+     * Provides empty ServiceType for new service form.
+     */
+    @ModelAttribute("serviceType")
+    public ServiceType getServiceType() {
+        return new ServiceType();
     }
 
     /**
@@ -71,7 +82,7 @@ public class ServiceController extends AbstractWebController<ServiceType, Long> 
      * @param model
      * @return
      */
-    @GetMapping("/")
+    @GetMapping({"", "/"})
     @Override
     public String getAll(Model model) {
         List<ServiceType> serviceTypes = serviceTypeService.getAll();

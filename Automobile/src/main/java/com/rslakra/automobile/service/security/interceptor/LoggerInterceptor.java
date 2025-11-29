@@ -9,8 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Enumeration;
 import java.util.Objects;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class LoggerInterceptor implements HandlerInterceptor {
 

@@ -90,10 +90,9 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
     protected UserDetails retrieveUser(String userName, UsernamePasswordAuthenticationToken authentication)
         throws AuthenticationException {
         LOGGER.debug("+retrieveUser({}, {})", userName, authentication);
-        PasswordAuthenticationToken passwordAuthToken = (PasswordAuthenticationToken) authentication;
         UserDetails loadedUserDetails;
         try {
-            loadedUserDetails = userDetailsService.loadUserByUsername(passwordAuthToken.getPrincipal().toString());
+            loadedUserDetails = userDetailsService.loadUserByUsername(authentication.getPrincipal().toString());
         } catch (UsernameNotFoundException ex) {
             if (BeanUtils.isNotNull(authentication.getCredentials())) {
                 String passwordProvided = ContextUtils.getAuthenticatedPassword(authentication);
