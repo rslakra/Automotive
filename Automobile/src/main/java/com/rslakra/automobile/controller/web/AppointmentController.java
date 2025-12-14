@@ -306,7 +306,7 @@ public class AppointmentController extends AbstractWebController<Appointment, Lo
      * @return
      */
     @Override
-    public String filter(Model model, Filter filter) {
+    public String filter(Model model, Filter<Appointment> filter) {
         LOGGER.debug("filter({}, {})", model, filter);
         return null;
     }

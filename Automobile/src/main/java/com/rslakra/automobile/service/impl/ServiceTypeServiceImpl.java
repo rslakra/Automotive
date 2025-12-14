@@ -94,7 +94,7 @@ public class ServiceTypeServiceImpl extends AbstractServiceImpl<ServiceType, Lon
      * @return
      */
     @Override
-    public List<ServiceType> getByFilter(Filter filter) {
+    public List<ServiceType> getByFilter(Filter<ServiceType> filter) {
         return null;
     }
 
@@ -104,7 +104,7 @@ public class ServiceTypeServiceImpl extends AbstractServiceImpl<ServiceType, Lon
      * @return
      */
     @Override
-    public Page<ServiceType> getByFilter(Filter filter, Pageable pageable) {
+    public Page<ServiceType> getByFilter(Filter<ServiceType> filter, Pageable pageable) {
         return null;
     }
 

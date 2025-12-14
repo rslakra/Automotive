@@ -2,6 +2,7 @@ package com.rslakra.automobile.controller.rest;
 
 import com.rslakra.appsuite.core.Payload;
 import com.rslakra.appsuite.spring.controller.rest.AbstractRestController;
+import com.rslakra.appsuite.spring.filter.DefaultFilter;
 import com.rslakra.appsuite.spring.filter.Filter;
 import com.rslakra.automobile.domain.entities.Appointment;
 import com.rslakra.automobile.filter.AppointmentFilter;
@@ -67,7 +68,7 @@ public class AppointmentRestController extends AbstractRestController<Appointmen
      * @return
      */
     @Override
-    public List<Appointment> getByFilter(Filter filter) {
+    public List<Appointment> getByFilter(Filter<Appointment> filter) {
         return null;
     }
 
@@ -77,7 +78,7 @@ public class AppointmentRestController extends AbstractRestController<Appointmen
      * @return
      */
     @Override
-    public Page<Appointment> getByFilter(Filter filter, Pageable pageable) {
+    public Page<Appointment> getByFilter(Filter<Appointment> filter, Pageable pageable) {
         return null;
     }
 
@@ -91,11 +92,13 @@ public class AppointmentRestController extends AbstractRestController<Appointmen
         LOGGER.debug("+getByFilter({})", allParams);
         List<Appointment> appointments = Collections.emptyList();
         AppointmentFilter filter = new AppointmentFilter(allParams);
-        if (filter.hasKeys(AppointmentFilter.ID, AppointmentFilter.NAME)) {
-        } else if (filter.hasKey(AppointmentFilter.ID)) {
-            appointments = Arrays.asList(appointmentService.getById(filter.getLong(AppointmentFilter.ID)));
-        } else if (filter.hasKey(AppointmentFilter.NAME)) {
-// roles = Arrays.asList(appointmentService.getByName(filter.getValue(AppointmentFilter.NAME)));
+        if (filter.hasKeys(DefaultFilter.ID, DefaultFilter.NAME)) {
+            // Use both ID and NAME from the filter
+            appointments = appointmentService.getByFilter(filter);
+        } else if (filter.hasKey(DefaultFilter.ID)) {
+            appointments = Arrays.asList(appointmentService.getById(filter.getValue(DefaultFilter.ID, Long.class)));
+        } else if (filter.hasKey(DefaultFilter.NAME)) {
+// roles = Arrays.asList(appointmentService.getByName(filter.getValue(Filter.NAME)));
         } else {
             appointments = appointmentService.getByFilter(filter);
         }

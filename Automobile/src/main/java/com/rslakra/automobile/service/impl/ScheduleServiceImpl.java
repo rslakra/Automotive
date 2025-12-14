@@ -139,12 +139,12 @@ public class ScheduleServiceImpl extends AbstractServiceImpl<Schedule, Long> imp
     }
 
     @Override
-    public List<Schedule> getByFilter(Filter filter) {
+    public List<Schedule> getByFilter(Filter<Schedule> filter) {
         return getAll();
     }
 
     @Override
-    public Page<Schedule> getByFilter(Filter filter, Pageable pageable) {
+    public Page<Schedule> getByFilter(Filter<Schedule> filter, Pageable pageable) {
         return scheduleRepository.findAll(pageable);
     }
 

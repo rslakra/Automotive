@@ -154,7 +154,7 @@ public class AppointmentServiceImpl extends AbstractServiceImpl<Appointment, Lon
      * @return
      */
     @Override
-    public List<Appointment> getByFilter(Filter filter) {
+    public List<Appointment> getByFilter(Filter<Appointment> filter) {
         return appointmentRepository.findAll();
     }
 
@@ -164,7 +164,7 @@ public class AppointmentServiceImpl extends AbstractServiceImpl<Appointment, Lon
      * @return
      */
     @Override
-    public Page<Appointment> getByFilter(Filter filter, Pageable pageable) {
+    public Page<Appointment> getByFilter(Filter<Appointment> filter, Pageable pageable) {
         return appointmentRepository.findAll(pageable);
     }
 

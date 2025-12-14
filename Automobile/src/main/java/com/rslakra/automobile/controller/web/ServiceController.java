@@ -96,7 +96,7 @@ public class ServiceController extends AbstractWebController<ServiceType, Long> 
      * @return
      */
     @Override
-    public String filter(Model model, Filter filter) {
+    public String filter(Model model, Filter<ServiceType> filter) {
         return null;
     }
 

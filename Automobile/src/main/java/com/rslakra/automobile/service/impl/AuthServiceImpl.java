@@ -219,7 +219,7 @@ public class AuthServiceImpl extends AbstractServiceImpl<AutoUser, Long> impleme
      * @return
      */
     @Override
-    public List<AutoUser> getByFilter(Filter filter) {
+    public List<AutoUser> getByFilter(Filter<AutoUser> filter) {
         return userRepository.findAll();
     }
 
@@ -229,7 +229,7 @@ public class AuthServiceImpl extends AbstractServiceImpl<AutoUser, Long> impleme
      * @return
      */
     @Override
-    public Page<AutoUser> getByFilter(Filter filter, Pageable pageable) {
+    public Page<AutoUser> getByFilter(Filter<AutoUser> filter, Pageable pageable) {
         return userRepository.findAll(pageable);
     }
 
