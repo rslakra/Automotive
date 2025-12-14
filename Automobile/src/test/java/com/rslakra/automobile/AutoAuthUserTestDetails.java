@@ -42,7 +42,7 @@ public class AutoAuthUserTestDetails {
         Vehicle vehicle = new Vehicle();
         vehicle.setMake("Ford");
         vehicle.setModel("F150");
-        vehicle.setYear(new Short("2015"));
+        vehicle.setYear(Short.valueOf("2015"));
 
         AutoUser autoUser = new AutoUser();
         Optional<AutoUser> autoUserOptional = userRepository.findFirstByOrderByIdDesc();
