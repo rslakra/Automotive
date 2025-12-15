@@ -76,7 +76,7 @@ public class HttpSecurityConfigurer extends AbstractHttpConfigurer<HttpSecurityC
         /* Allow frames only with the same origin, which is much more safe. */
         http
             .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
-            /* Ignore only h2-console csrf, spring-security 6. */
+            /* Ignore only h2 csrf, spring-security 6. */
             .csrf(csrf -> csrf.ignoringRequestMatchers("/h2/**"))
             /* Authorization */
             .authorizeHttpRequests(auth -> auth
